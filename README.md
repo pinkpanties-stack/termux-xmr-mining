@@ -71,7 +71,7 @@ BIN_P2POOL=~/p2pool/build/p2pool
 if [[ -z $WALLET_ADDR ]]; then
   echo -e "\nError: You must define the wallet address before running this script.\n" >&2
   exit 255
-fi 
+fi
 
 # Main
 if [[ $USE_REMOTE_NODE == false ]]; then
@@ -102,15 +102,22 @@ set -o xtrace
 # Config
 LIMIT_ON_BATTERY=true
 ENABLE_OPENCL=true
+SLOW_MODE=false
+SLOW_MODE_THRES=4G
 
 # Internals
 BIN_XMRIG=~/xmrig/build/xmrig
+SLOW_MODE_THRES_CLEAN="${SLOW_MODE_THRES//G/}"
+SLOW_MODE_RAM_SIZE=$((SLOW_MODE_THRES_CLEAN*1024*1024))
+DEVICE_MEM_SIZE=$(cat /proc/meminfo | cut -d" " -f9)
 
 # Checks
-[[ -z $($BIN_XMRIG --print-platforms 2>/dev/null) ]] && ENABLE_OPENCL=false
+[[ $DEVICE_MEM_SIZE -lt $SLOW_MODE_RAM_SIZE ]] && SLOW_MODE=true
+[[ $SLOW_MODE == true || -z $($BIN_XMRIG --print-platforms 2>/dev/null) ]] && ENABLE_OPENCL=false
 
 # Init
 [[ $ENABLE_OPENCL == true ]] && OPT_ARGS="--opencl --opencl-platform=0"
+[[ $SLOW_MODE == true ]] && OPT_ARGS="--randomx-mode=light"
 
 # Main
 if [[ $LIMIT_ON_BATTERY == false ]]; then
