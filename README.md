@@ -49,7 +49,7 @@ Use can use this page to select the remote node you want to use:
 
 To make the prcess even more easier, you can use the following launcher scripts:
 
-* __start-p2pool.sh__
+* __[start-p2pool.sh](start-p2pool.sh)__
 
 ```bash
 #!/usr/bin/env bash
@@ -91,7 +91,7 @@ fi
 
 > The `--light-mode` argument is required to avoid consuming all the mobile memory which then leads to a complete crash...
 
-* __start-xmrig.sh__
+* __[start-xmrig.sh](start-xmrig.sh)__
 
 ```bash
 #!/usr/bin/env bash
