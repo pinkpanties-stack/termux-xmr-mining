@@ -125,10 +125,19 @@ fi
 
 Make the launcher scripts executable first with `chmod -c +x start-*.sh` then excute them both in dedicated tab / session.
 
+Clone this repo to make things easier:
+
+```console
+$ git clone https://github.com/Jiab77/termux-xmr-mining.git
+$ cd termux-xmr-mining
+```
+
+Then run the scripts for the `termux-xmr-mining` folder:
+
 * __start-p2pool.sh__
 
 ```console
-$ ~/start-p2pool.sh
+$ ./start-p2pool.sh
 ```
 
 > Wait around 5 to 10 minutes for `p2pool` to be fully synced.
@@ -136,7 +145,7 @@ $ ~/start-p2pool.sh
 * __start-xmrig.sh__
 
 ```console
-$ ~/start-xmrig.sh
+$ ./start-xmrig.sh
 ```
 
 > You can stop both scripts by using `[Ctrl + C]` in case the mobile device is overheating.
