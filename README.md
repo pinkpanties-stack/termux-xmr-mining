@@ -139,8 +139,6 @@ fi
 
 ## Run launcher scripts
 
-Make the launcher scripts executable first with `chmod -c +x start-*.sh` then excute them both in dedicated tab / session.
-
 Clone this repo to make things easier:
 
 ```console
@@ -148,7 +146,9 @@ $ git clone https://github.com/Jiab77/termux-xmr-mining.git
 $ cd termux-xmr-mining
 ```
 
-Then run the scripts for the `termux-xmr-mining` folder:
+Once done, make the launcher scripts executable first with `chmod -c +x start-*.sh` then excute them both in dedicated tab / session.
+
+_Add your wallet address in the `start-p2pool.sh` script or it will not run._
 
 * __start-p2pool.sh__
 
