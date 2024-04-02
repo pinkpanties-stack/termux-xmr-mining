@@ -171,6 +171,10 @@ $ ./start-xmrig.sh
 
 Have a look at the [pool observer](https://p2pool.observer/) and paste the wallet address you are using for mining to see your progression.
 
+## Thanks
+
+Thanks to [gupax](https://github.com/hinto-janai/gupax) devs for the inspiration.
+
 ## References
 
 * https://p2pool.io
