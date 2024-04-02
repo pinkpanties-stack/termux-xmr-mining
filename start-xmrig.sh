@@ -13,7 +13,7 @@ SLOW_MODE_THRES=4G
 BIN_XMRIG=~/xmrig/build/xmrig
 SLOW_MODE_THRES_CLEAN="${SLOW_MODE_THRES//G/}"
 SLOW_MODE_RAM_SIZE=$((SLOW_MODE_THRES_CLEAN*1024*1024))
-DEVICE_MEM_SIZE=$(cat /proc/meminfo | cut -d" " -f9)
+DEVICE_MEM_SIZE=$(cat /proc/meminfo | grep MemTotal | cut -d" " -f9)
 
 # Checks
 [[ $DEVICE_MEM_SIZE -lt $SLOW_MODE_RAM_SIZE ]] && SLOW_MODE=true
