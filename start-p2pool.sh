@@ -17,7 +17,7 @@ BIN_P2POOL=~/p2pool/build/p2pool
 if [[ -z $WALLET_ADDR ]]; then
   echo -e "\nError: You must define the wallet address before running this script.\n" >&2
   exit 255
-fi 
+fi
 
 # Main
 if [[ $USE_REMOTE_NODE == false ]]; then
