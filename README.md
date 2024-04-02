@@ -110,7 +110,7 @@ BIN_XMRIG=~/xmrig/build/xmrig
 [[ -z $($BIN_XMRIG --print-platforms 2>/dev/null) ]] && ENABLE_OPENCL=false
 
 # Init
-[[ $ENABLE_OPENCL == true ]] && OPT_ARGS="--opencl"
+[[ $ENABLE_OPENCL == true ]] && OPT_ARGS="--opencl --opencl-platform=0"
 
 # Main
 if [[ $LIMIT_ON_BATTERY == false ]]; then
