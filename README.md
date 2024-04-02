@@ -43,6 +43,7 @@ Once the compilation is finished, check if you have a binary called `xmrig` with
 
 Use can use this page to select the remote node you want to use:
 
+* https://monero.fail/
 * http://p2pmd.xmrvsbeast.com/p2pool/monero_nodes.html
 
 ## Launcher scripts
@@ -166,8 +167,13 @@ $ ./start-xmrig.sh
 
 > You can stop both scripts by using `[Ctrl + C]` in case the mobile device is overheating.
 
+## Check your progress
+
+Have a look at the [pool observer](https://p2pool.observer/) and paste the wallet address you are using for mining to see your progression.
+
 ## References
 
+* https://p2pool.io
 * https://github.com/SChernykh/p2pool
 * https://github.com/xmrig/xmrig
 
