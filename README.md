@@ -10,7 +10,7 @@ Once done, run the following commands:
 
 ```console
 $ pkg upgrade
-$ pkg install git build-essential cmake libuv libzmq libcurl
+$ pkg install -y git build-essential cmake libuv libzmq libcurl
 ```
 
 Next, install [p2pool](https://github.com/SChernykh/p2pool) and [xmrig](https://github.com/xmrig/xmrig).
@@ -39,6 +39,26 @@ $ make -j$(nproc)
 
 Once the compilation is finished, check if you have a binary called `xmrig` with a command like `ls -halF` or `./xmrig --help`.
 
+### Installing Termux API
+
+In order to be able to detect the temperature on mobile devices, you need to install both, mobile app and the Termux package.
+
+* Mobile App
+
+Search for application named "Termux API" and install it.
+
+* Termux Package
+
+```console
+$ pkg install -y termux-api
+```
+
+Additionally, you will also have to install the `jq` package as it is now required by the launcher scripts.
+
+```console
+$ pkg install -y jq
+```
+
 ## Remote nodes
 
 Use can use this page to select the remote node you want to use:
@@ -62,7 +82,7 @@ $ git clone https://github.com/Jiab77/termux-xmr-mining.git
 $ cd termux-xmr-mining
 ```
 
-Once done, make the launcher scripts executable first with `chmod -c +x start-*.sh` then excute them both in dedicated tab / session.
+Once done, run each launcher scripts in a dedicated tab / session by swipping from left to right on mobile devices.
 
 _Add your wallet address in the `start-p2pool.sh` script or it will not run._
 
