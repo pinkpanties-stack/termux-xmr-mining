@@ -3,21 +3,30 @@
 # P2Pool launcher script
 # Made by Jiab77
 #
-# Version 0.1.0
+# Version 0.2.0
 
 # Options
 [[ -r $HOME/.debug ]] && set -o xtrace || set +o xtrace
 
 # Config
+LIGHT_MODE=false
+LIGHT_MODE_THRES=8G
+USE_POOL_MINI=true
 USE_REMOTE_NODE=true
 REMOTE_NODE="node.monerodevs.org"
-RPC_PORT=18089
-ZMQ_PORT=18084
+REMOTE_RPC_PORT=18089
+REMOTE_ZMQ_PORT=18084
 WALLET_ADDR=""
+XVB_TOKEN=""
 
 # Internals
 BIN_P2POOL=~/p2pool/build/p2pool
-DEVICE_MEM_SIZE=$(grep MemTotal /proc/meminfo | cut -d" " -f9)
+BIN_AWK=$(command -v awk 2>/dev/null)
+LIGHT_MODE_THRES_CLEAN="${LIGHT_MODE_THRES//G/}"
+LIGHT_MODE_RAM_SIZE=$((LIGHT_MODE_THRES_CLEAN*1024*1024))
+DEVICE_MEM_SIZE=$(grep MemTotal /proc/meminfo | awk '{ print $2 }')
+LOCAL_NODE="127.0.0.1"
+OPT_ARGS=
 
 # Functions
 function die() {
@@ -45,16 +54,16 @@ function load_config() {
 function init_pool() {
   if [[ $USE_REMOTE_NODE == false ]]; then
     $BIN_P2POOL \
-      --host 127.0.0.1 \
+      --host "$LOCAL_NODE" \
       --wallet "$WALLET_ADDR" \
-      --light-mode
+      $OPT_ARGS
   else
     $BIN_P2POOL \
       --host "$REMOTE_NODE" \
-      --rpc-port $RPC_PORT \
-      --zmq-port $ZMQ_PORT \
       --wallet "$WALLET_ADDR" \
-      --light-mode
+      --rpc-port $REMOTE_RPC_PORT \
+      --zmq-port $REMOTE_ZMQ_PORT \
+      $OPT_ARGS
   fi
 }
 
@@ -71,9 +80,18 @@ while [[ $# -ne 0 ]]; do
 done
 
 # Checks
+[[ -z $BIN_AWK ]] && die "You must have 'awk' installed to run this script."
 [[ -z $WALLET_ADDR ]] && die "You must define the wallet address before running this script."
 [[ ! -r $BIN_P2POOL ]] && die "File '$BIN_P2POOL' is missing 'read' permission."
 [[ ! -x $BIN_P2POOL ]] && die "File '$BIN_P2POOL' is missing 'exec' permission."
+
+# Overrides
+[[ $DEVICE_MEM_SIZE -lt $LIGHT_MODE_RAM_SIZE ]] && LIGHT_MODE=true
+[[ $(echo "$REMOTE_NODE" | grep -ci "p2pmd") -ne 0 ]] && REMOTE_RPC_PORT=18081
+
+# Init
+[[ $LIGHT_MODE == true ]] && OPT_ARGS+=" --light-mode"
+[[ $USE_POOL_MINI == true ]] && OPT_ARGS+=" --mini"
 
 # Main
 init_pool
