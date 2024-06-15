@@ -188,6 +188,7 @@ Thanks to [gupax](https://github.com/hinto-janai/gupax) and [gupaxx](https://git
 * [ ] Add [XvB Raffle](https://p2pmd.xmrvsbeast.com/p2pool) support (_pending_)
 * [ ] Add API support for P2Pool, XMrig and XvB
 * [ ] Add Tor support
+* [ ] Add [iSH](https://github.com/ish-app/ish) support
 * [ ] Create installer scripts
 * [ ] Improve OpenCL code
 * [ ] Improve documentation
